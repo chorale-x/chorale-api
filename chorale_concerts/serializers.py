@@ -6,16 +6,25 @@ from chorale_concerts.models import Concert, Piece, Soloist, Musician, Reservati
 class PieceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Piece
+        extra_kwargs = {'concert': {'write_only': True}}
+
+    concert_id = serializers.PrimaryKeyRelatedField(read_only=True)
 
 
 class SoloistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Soloist
+        extra_kwargs = {'concert': {'write_only': True}}
+
+    concert_id = serializers.PrimaryKeyRelatedField(read_only=True)
 
 
 class MusicianSerializer(serializers.ModelSerializer):
     class Meta:
         model = Musician
+        extra_kwargs = {'concert': {'write_only': True}}
+
+    concert_id = serializers.PrimaryKeyRelatedField(read_only=True)
 
 
 class ConcertSerializer(serializers.ModelSerializer):
@@ -29,4 +38,3 @@ class ConcertSerializer(serializers.ModelSerializer):
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
-
