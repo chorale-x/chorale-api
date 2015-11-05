@@ -20,7 +20,7 @@ class Concert(models.Model):
     eventbrite = models.URLField(max_length=254, blank=True)
 
     def __str__(self):
-        return "Concert {:%d %b %Y}".format(self.date)
+        return "Concert du {:%d %b %Y}".format(self.date)
 
 
 class Piece(models.Model):
@@ -30,6 +30,9 @@ class Piece(models.Model):
     concert = models.ForeignKey(Concert, related_name='pieces')
     rank = models.PositiveSmallIntegerField(default=1)
 
+    def __str__(self):
+        return "%s (%s) - %s" % (self.title, self.composer_lastname, self.concert.__str__())
+
 
 class Soloist(models.Model):
     voice = models.CharField(max_length=100)
@@ -38,6 +41,9 @@ class Soloist(models.Model):
     concert = models.ForeignKey(Concert, related_name='soloists')
     rank = models.PositiveSmallIntegerField(default=1)
 
+    def __str__(self):
+        return "%s %s (%s) - %s" % (self.lastname, self.firstname, self.voice, self.concert.__str__())
+
 
 class Musician(models.Model):
     instrument = models.CharField(max_length=100)
@@ -45,6 +51,9 @@ class Musician(models.Model):
     firstname = models.CharField(max_length=100)
     concert = models.ForeignKey(Concert, related_name='musicians')
     rank = models.PositiveSmallIntegerField(default=1)
+
+    def __str__(self):
+        return "%s %s (%s) - %s" % (self.lastname, self.firstname, self.instrument, self.concert.__str__())
 
 
 class Reservation(models.Model):
@@ -61,4 +70,3 @@ class Reservation(models.Model):
     message = models.TextField(blank=True)
     subscriber = models.BooleanField(default=True)
     checked = models.BooleanField(default=False)
-
