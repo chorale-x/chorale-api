@@ -37,7 +37,7 @@ class Piece(models.Model):
 class Soloist(models.Model):
     voice = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
-    firstname = models.CharField(max_length=100)
+    firstname = models.CharField(max_length=100, blank=True)
     concert = models.ForeignKey(Concert, related_name='soloists')
     rank = models.PositiveSmallIntegerField(default=1)
 
@@ -48,7 +48,7 @@ class Soloist(models.Model):
 class Musician(models.Model):
     instrument = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
-    firstname = models.CharField(max_length=100)
+    firstname = models.CharField(max_length=100, blank=True)
     concert = models.ForeignKey(Concert, related_name='musicians')
     rank = models.PositiveSmallIntegerField(default=1)
 
