@@ -35,6 +35,10 @@ class ConcertSerializer(serializers.ModelSerializer):
         model = Concert
 
 
+class ConcertPosterSerializer(serializers.Serializer):
+    poster = serializers.ImageField(max_length=254)
+
+
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation

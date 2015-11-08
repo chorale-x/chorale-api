@@ -112,6 +112,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = '/Users/camille/Sites/chorale/chorale-api/media/'
+MEDIA_URL = 'http://localhost/~camille/chorale/chorale-api/media/'
+
 
 REST_FRAMEWORK = {
     'DEFAULT_MODEL_SERIALIZER_CLASS':

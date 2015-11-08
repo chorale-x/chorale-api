@@ -12,7 +12,7 @@ class Concert(models.Model):
     director_lastname = models.CharField(max_length=100, blank=True)
     director_firstname = models.CharField(max_length=100, blank=True)
     comment = models.TextField(blank=True)
-    # image = models.ImageField(upload_to='posters')
+    poster = models.ImageField(upload_to='posters', max_length=254, blank=True)
     published = models.BooleanField(default=True)
     announced = models.BooleanField(default=False)
     booking = models.BooleanField(default=False)
