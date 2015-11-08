@@ -33,6 +33,7 @@ class ConcertSerializer(serializers.ModelSerializer):
     musicians = MusicianSerializer(many=True, read_only=True)
     class Meta:
         model = Concert
+        read_only_fields = ('poster', )
 
 
 class ConcertPosterSerializer(serializers.Serializer):

@@ -15,6 +15,6 @@ coverage
 Pillow
 ipython
 ipdb
-pyparsing==1.5.7
-pydot
+#pyparsing==1.5.7
+#pydot
 mysqlclient
