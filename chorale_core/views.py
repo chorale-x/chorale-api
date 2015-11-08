@@ -30,7 +30,8 @@ class GalleryList(APIView):
         p_list = []
         id = 1
         for p in photos:
-            p_list.append({'id': id, 'href': fs.base_url + 'gallery/' + p, 'thumbnail': fs.base_url + 'gallery/thumbnails/' + p})
-            id = id+1
-            
+            if p != '.DS_Store':
+                p_list.append({'id': id, 'href': fs.base_url + 'gallery/' + p, 'thumbnail': fs.base_url + 'gallery/thumbnails/' + p})
+                id = id+1
+
         return Response(p_list, 200)
