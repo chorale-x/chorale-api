@@ -6,10 +6,11 @@ from django.core.files.storage import FileSystemStorage
 from rest_framework import viewsets, decorators
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from chorale.settings import BASE_DIR as PROJECT_ROOT
+from chorale.settings import BASE_DIR
 from chorale_core.models import UserSerializer, Comment, CommentSerializer, SubscriberSerializer
+from chorale_core.permissions import SubscriberPermission
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -41,13 +42,13 @@ class GalleryList(APIView):
         return Response(p_list, 200)
 
 
-SECRET_FILE = os.path.join(PROJECT_ROOT, 'mailchimp')
+SECRET_FILE = os.path.join(BASE_DIR, 'mailchimp')
 f = open(SECRET_FILE)
 LIST_ID = f.readline().rstrip()
 API_KEY = f.readline().rstrip()
 
 class SubscriberList(APIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (SubscriberPermission, )
 
     def get(self, request):
         url = 'https://us10.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members?offset=0&count=10000'

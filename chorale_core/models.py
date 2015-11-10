@@ -29,4 +29,4 @@ class SubscriberSerializer(serializers.Serializer):
     first_name = serializers.CharField(max_length=254)
     email_address = serializers.EmailField()
     status = serializers.CharField(read_only=True)
-    phone = serializers.CharField(max_length=15)
+    phone = serializers.CharField(max_length=15, allow_null=True)
