@@ -1,4 +1,4 @@
-import requests, json
+import requests, json, os
 
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
+from chorale.settings import BASE_DIR as PROJECT_ROOT
 from chorale_core.models import UserSerializer, Comment, CommentSerializer, SubscriberSerializer
 
 
@@ -39,6 +40,11 @@ class GalleryList(APIView):
 
         return Response(p_list, 200)
 
+
+SECRET_FILE = os.path.join(PROJECT_ROOT, 'mailchimp')
+f = open(SECRET_FILE)
+LIST_ID = f.readline().rstrip()
+API_KEY = f.readline().rstrip()
 
 class SubscriberList(APIView):
     permission_classes = (IsAuthenticated, )
