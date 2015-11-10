@@ -17,7 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework import routers
 
-from chorale_core.views import UserViewSet, CommentViewSet, GalleryList
+from chorale_core.views import UserViewSet, CommentViewSet, GalleryList, SubscriberList, SubscriberDetail
 from chorale_concerts.views import ConcertViewSet, PieceViewSet, SoloistViewSet, MusicianViewSet, ReservationViewSet
 
 router = routers.DefaultRouter()
@@ -37,4 +37,6 @@ urlpatterns = [
     url(r'^api-token-auth/', 'rest_framework_jwt.views.obtain_jwt_token'),
     url(r'^', include(router.urls)),
     url(r'^gallery/$', GalleryList.as_view()),
+    url(r'^subscriber/$', SubscriberList.as_view()),
+    url(r'^subscriber/(?P<pk>[a-zA-Z0-9]+)/$', SubscriberDetail.as_view())
 ]

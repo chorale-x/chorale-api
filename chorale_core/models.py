@@ -20,4 +20,13 @@ class Comment(models.Model):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        
+
+
+class SubscriberSerializer(serializers.Serializer):
+    id = serializers.CharField(max_length=254, read_only=True)
+    civility = serializers.CharField(max_length=30)
+    last_name = serializers.CharField(max_length=254)
+    first_name = serializers.CharField(max_length=254)
+    email_address = serializers.EmailField()
+    status = serializers.CharField(read_only=True)
+    phone = serializers.CharField(max_length=15)
