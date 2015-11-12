@@ -18,6 +18,7 @@ class Concert(models.Model):
     booking = models.BooleanField(default=False)
     fnac = models.URLField(max_length=254, blank=True)
     eventbrite = models.URLField(max_length=254, blank=True)
+    phone = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
         return "Concert du {:%d %b %Y}".format(self.date)
