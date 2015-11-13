@@ -68,3 +68,13 @@ class ReservationViewSet(viewsets.ModelViewSet):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
     filter_fields = ('concert', 'checked', )
+
+    @decorators.list_route(methods=['delete'])
+    def empty_concert(self, request):
+        concert_id = request.query_params.get('concert', None)
+        if concert_id is not None:
+            concert = get_object_or_404(Concert.objects.all(), pk=concert_id)
+            Reservation.objects.filter(concert=concert).delete()
+            return Response(status=204)
+        else:
+            return Response("No concert specified", 400)
