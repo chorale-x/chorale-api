@@ -15,6 +15,7 @@ from chorale_concerts.serializers import ConcertSerializer, ConcertPosterSeriali
 class ConcertViewSet(viewsets.ModelViewSet):
     queryset = Concert.objects.all()
     serializer_class = ConcertSerializer
+    filter_fields = ('published', 'booking', )
 
     @decorators.list_route(methods=['GET'])
     def next(self, request):
@@ -66,3 +67,4 @@ class MusicianViewSet(viewsets.ModelViewSet):
 class ReservationViewSet(viewsets.ModelViewSet):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
+    filter_fields = ('concert', 'checked', )

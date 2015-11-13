@@ -43,3 +43,6 @@ class ConcertPosterSerializer(serializers.Serializer):
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
+        extra_kwargs = {'concert': {'write_only': True}}
+
+    concert_id = serializers.PrimaryKeyRelatedField(read_only=True)
