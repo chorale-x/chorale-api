@@ -38,10 +38,10 @@ except NameError:
             to generate your secret key!' % SECRET_FILE)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    'http://localhost:3000'
+'*'
 ]
 
 
@@ -164,3 +164,12 @@ GRAPH_MODELS = {
   'all_applications': True,
   'group_models': True,
 }
+
+
+STATIC_URL = '/assets/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, "assets/static/")
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "assets/media/")
+
+MEDIA_URL = '/assets/media/'
