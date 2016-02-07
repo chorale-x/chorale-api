@@ -51,9 +51,13 @@ class SubscriberList(APIView):
     permission_classes = (SubscriberPermission, )
 
     def get(self, request):
-        url = 'https://us10.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members?offset=0&count=10000'
-        headers = {'Content-type': 'application/json', 'Authorization': 'apikey ' + API_KEY}
-        r = requests.get(url, headers=headers)
+        url = 'https://us12.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members?offset=0&count=10000'
+        # headers = {'Content-type': 'application/json', 'Authorization': 'apikey ' + API_KEY}
+        headers = {'Content-type': 'application/json'}
+        # r = requests.get(url, headers=headers)
+        r = requests.get(url, headers=headers, auth=('anystring',API_KEY))
+
+
         members = []
         for m in r.json()['members']:
             mem = {
@@ -84,9 +88,12 @@ class SubscriberList(APIView):
                 }
             }
             json_payload = json.dumps(payload)
-            url = 'https://us10.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members'
+            url = 'https://us12.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members'
             headers = {'Content-type': 'application/json', 'Content-Length': len(json_payload), 'Authorization': 'apikey ' + API_KEY}
+            # headers = {'Content-type': 'application/json', 'Content-Length': len(json_payload),}
             r = requests.post(url, headers=headers, data=json_payload)
+            # r = requests.post(url, headers=headers, data=json_payload, auth=('anystring',API_KEY))
+            print(r.json())
 
             m = r.json()
             mem = {
@@ -108,7 +115,7 @@ class SubscriberDetail(APIView):
     permission_classes = (IsAuthenticated, )
 
     def get(self, request, pk=None):
-        url = 'https://us10.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members/' + pk
+        url = 'https://us12.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members/' + pk
         headers = {'Content-type': 'application/json', 'Authorization': 'apikey ' + API_KEY}
         r = requests.get(url, headers=headers)
 
@@ -129,7 +136,7 @@ class SubscriberDetail(APIView):
         return Response(serializer.data, 200)
 
     def delete(self, request, pk=None):
-        url = 'https://us10.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members/' + pk
+        url = 'https://us12.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members/' + pk
         headers = {'Content-type': 'application/json', 'Authorization': 'apikey ' + API_KEY}
         r = requests.delete(url, headers=headers)
 
