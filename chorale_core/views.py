@@ -68,8 +68,8 @@ class SubscriberList(APIView):
                 'email_address': m['email_address'],
                 'status': m['status'],
                 'civility': m['merge_fields']['CIVILITY'],
-                'first_name': m['merge_fields']['LNAME'],
-                'last_name': m['merge_fields']['FNAME'],
+                'first_name': m['merge_fields']['FNAME'],
+                'last_name': m['merge_fields']['LNAME'],
                 'phone': m['merge_fields']['PHONE']
             }
             members.append(mem)
@@ -102,8 +102,8 @@ class SubscriberList(APIView):
                 'email_address': m['email_address'],
                 'status': m['status'],
                 'civility': m['merge_fields']['CIVILITY'],
-                'first_name': m['merge_fields']['LNAME'],
-                'last_name': m['merge_fields']['FNAME'],
+                'first_name': m['merge_fields']['FNAME'],
+                'last_name': m['merge_fields']['LNAME'],
                 'phone': m['merge_fields']['PHONE']
             }
             rep_serial = SubscriberSerializer(mem)
@@ -129,8 +129,8 @@ class SubscriberDetail(APIView):
             'email_address': m['email_address'],
             'status': m['status'],
             'civility': m['merge_fields']['CIVILITY'],
-            'first_name': m['merge_fields']['LNAME'],
-            'last_name': m['merge_fields']['FNAME'],
+            'first_name': m['merge_fields']['FNAME'],
+            'last_name': m['merge_fields']['LNAME'],
             'phone': m['merge_fields']['PHONE']
         }
         serializer = SubscriberSerializer(mem)
