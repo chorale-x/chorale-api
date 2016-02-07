@@ -35,13 +35,13 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 class GalleryList(APIView):
     def get(self, request):
-        fs = FileSystemStorage(location='media/gallery')
+        fs = FileSystemStorage(location='assets/media/gallery')
         _, photos = fs.listdir('')
         p_list = []
         id = 1
         for p in photos:
             if p != '.DS_Store':
-                p_list.append({'id': id, 'href': fs.base_url + 'gallery/' + p, 'thumbnail': fs.base_url + 'gallery/thumbnails/' + p})
+                p_list.append({'id': id, 'href': 'api'+ fs.base_url + 'gallery/' + p, 'thumbnail': 'api' + fs.base_url + 'gallery/thumbnails/' + p})
                 id = id+1
 
         return Response(p_list, 200)
