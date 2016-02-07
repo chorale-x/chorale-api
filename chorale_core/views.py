@@ -13,6 +13,11 @@ from chorale_core.models import UserSerializer, Comment, CommentSerializer, Subs
 from chorale_core.permissions import SubscriberPermission
 
 
+proxies = {
+  "http": "http://kuzh.polytechnique.fr:8080",
+  "https": "http://kuzh.polytechnique.fr:8080",
+}
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -52,10 +57,8 @@ class SubscriberList(APIView):
 
     def get(self, request):
         url = 'https://us12.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members?offset=0&count=10000'
-        # headers = {'Content-type': 'application/json', 'Authorization': 'apikey ' + API_KEY}
-        headers = {'Content-type': 'application/json'}
-        # r = requests.get(url, headers=headers)
-        r = requests.get(url, headers=headers, auth=('anystring',API_KEY))
+        headers = {'Content-type': 'application/json', 'Authorization': 'apikey ' + API_KEY}
+        r = requests.get(url, headers=headers, proxies=proxies)
 
 
         members = []
@@ -90,9 +93,7 @@ class SubscriberList(APIView):
             json_payload = json.dumps(payload)
             url = 'https://us12.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members'
             headers = {'Content-type': 'application/json', 'Content-Length': len(json_payload), 'Authorization': 'apikey ' + API_KEY}
-            # headers = {'Content-type': 'application/json', 'Content-Length': len(json_payload),}
-            r = requests.post(url, headers=headers, data=json_payload)
-            # r = requests.post(url, headers=headers, data=json_payload, auth=('anystring',API_KEY))
+            r = requests.post(url, headers=headers, data=json_payload, proxies=proxies)
             print(r.json())
 
             m = r.json()
@@ -117,7 +118,7 @@ class SubscriberDetail(APIView):
     def get(self, request, pk=None):
         url = 'https://us12.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members/' + pk
         headers = {'Content-type': 'application/json', 'Authorization': 'apikey ' + API_KEY}
-        r = requests.get(url, headers=headers)
+        r = requests.get(url, headers=headers, proxies=proxies)
 
         if r.status_code == 404:
             return Response("Resource not found", 404)
@@ -138,7 +139,7 @@ class SubscriberDetail(APIView):
     def delete(self, request, pk=None):
         url = 'https://us12.api.mailchimp.com/3.0/lists/' + LIST_ID + '/members/' + pk
         headers = {'Content-type': 'application/json', 'Authorization': 'apikey ' + API_KEY}
-        r = requests.delete(url, headers=headers)
+        r = requests.delete(url, headers=headers, proxies=proxies)
 
         if r.status_code == 204:
             return Response(status=204)
