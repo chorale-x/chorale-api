@@ -63,15 +63,26 @@ class SubscriberList(APIView):
 
         members = []
         for m in r.json()['members']:
-            mem = {
-                'id': m['id'],
-                'email_address': m['email_address'],
-                'status': m['status'],
-                'civility': m['merge_fields']['MMERGE3'],
-                'first_name': m['merge_fields']['FNAME'],
-                'last_name': m['merge_fields']['LNAME'],
-                'phone': m['merge_fields']['MMERGE4']
-            }
+            try:
+                mem = {
+                    'id': m['id'],
+                    'email_address': m['email_address'],
+                    'status': m['status'],
+                    'civility': m['merge_fields']['MMERGE3'],
+                    'first_name': m['merge_fields']['FNAME'],
+                    'last_name': m['merge_fields']['LNAME'],
+                    'phone': m['merge_fields']['MMERGE4']
+                }
+            except:
+                mem = {
+                    'id': m['id'],
+                    'email_address': m['email_address'],
+                    'status': m['status'],
+                    'civility': m['merge_fields']['CIVILITY'],
+                    'first_name': m['merge_fields']['FNAME'],
+                    'last_name': m['merge_fields']['LNAME'],
+                    'phone': m['merge_fields']['PHONE']
+                }
             members.append(mem)
 
         serializer = SubscriberSerializer(members, many=True)
@@ -123,16 +134,28 @@ class SubscriberDetail(APIView):
         if r.status_code == 404:
             return Response("Resource not found", 404)
 
+
         m = r.json()
-        mem = {
-            'id': m['id'],
-            'email_address': m['email_address'],
-            'status': m['status'],
-            'civility': m['merge_fields']['MMERGE3'],
-            'first_name': m['merge_fields']['FNAME'],
-            'last_name': m['merge_fields']['LNAME'],
-            'phone': m['merge_fields']['MMEGER4']
-        }
+        try:
+            mem = {
+                'id': m['id'],
+                'email_address': m['email_address'],
+                'status': m['status'],
+                'civility': m['merge_fields']['MMERGE3'],
+                'first_name': m['merge_fields']['FNAME'],
+                'last_name': m['merge_fields']['LNAME'],
+                'phone': m['merge_fields']['MMERGE4']
+            }
+        except:
+            mem = {
+                'id': m['id'],
+                'email_address': m['email_address'],
+                'status': m['status'],
+                'civility': m['merge_fields']['CIVILITY'],
+                'first_name': m['merge_fields']['FNAME'],
+                'last_name': m['merge_fields']['LNAME'],
+                'phone': m['merge_fields']['PHONE']
+            }
         serializer = SubscriberSerializer(mem)
         return Response(serializer.data, 200)
 
