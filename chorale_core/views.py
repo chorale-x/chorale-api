@@ -67,10 +67,10 @@ class SubscriberList(APIView):
                 'id': m['id'],
                 'email_address': m['email_address'],
                 'status': m['status'],
-                'civility': m['merge_fields']['CIVILITY'],
+                'civility': m['merge_fields']['MMERGE3'],
                 'first_name': m['merge_fields']['FNAME'],
                 'last_name': m['merge_fields']['LNAME'],
-                'phone': m['merge_fields']['PHONE']
+                'phone': m['merge_fields']['MMERGE4']
             }
             members.append(mem)
 
@@ -84,10 +84,10 @@ class SubscriberList(APIView):
                 'email_address': serializer.data.get('email_address'),
                 'status': 'pending',
                 'merge_fields': {
-                    'CIVILITY': serializer.data.get('civility'),
+                    'MMERGE3': serializer.data.get('civility'),
                     'LNAME': serializer.data.get('last_name'),
                     'FNAME': serializer.data.get('first_name'),
-                    'PHONE': serializer.data.get('phone')
+                    'MMERGE4': serializer.data.get('phone')
                 }
             }
             json_payload = json.dumps(payload)
@@ -101,10 +101,10 @@ class SubscriberList(APIView):
                 'id': m['id'],
                 'email_address': m['email_address'],
                 'status': m['status'],
-                'civility': m['merge_fields']['CIVILITY'],
+                'civility': m['merge_fields']['MMERGE3'],
                 'first_name': m['merge_fields']['FNAME'],
                 'last_name': m['merge_fields']['LNAME'],
-                'phone': m['merge_fields']['PHONE']
+                'phone': m['merge_fields']['MMERGE4']
             }
             rep_serial = SubscriberSerializer(mem)
             return Response(rep_serial.data, 200)
@@ -128,10 +128,10 @@ class SubscriberDetail(APIView):
             'id': m['id'],
             'email_address': m['email_address'],
             'status': m['status'],
-            'civility': m['merge_fields']['CIVILITY'],
+            'civility': m['merge_fields']['MMERGE3'],
             'first_name': m['merge_fields']['FNAME'],
             'last_name': m['merge_fields']['LNAME'],
-            'phone': m['merge_fields']['PHONE']
+            'phone': m['merge_fields']['MMEGER4']
         }
         serializer = SubscriberSerializer(mem)
         return Response(serializer.data, 200)
