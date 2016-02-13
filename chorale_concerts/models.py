@@ -16,6 +16,8 @@ class Concert(models.Model):
     published = models.BooleanField(default=True)
     announced = models.BooleanField(default=False)
     booking = models.BooleanField(default=False)
+    has_student_seats = models.BooleanField(default=True)
+    has_numbered_seats = models.BooleanField(default=True)
     fnac = models.URLField(max_length=254, blank=True)
     eventbrite = models.URLField(max_length=254, blank=True)
     phone = models.CharField(max_length=20, blank=True)
