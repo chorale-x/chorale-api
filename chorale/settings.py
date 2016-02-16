@@ -121,16 +121,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
-
-STATIC_URL = '/static/'
-
-MEDIA_ROOT = '/Users/camille/Sites/chorale/chorale-api/media/'
-MEDIA_URL = 'http://localhost/~camille/chorale/chorale-api/media/'
-
-
 REST_FRAMEWORK = {
     'DEFAULT_MODEL_SERIALIZER_CLASS':
         'rest_framework.serializers.HyperlinkedModelSerializer',
@@ -164,6 +154,10 @@ GRAPH_MODELS = {
   'all_applications': True,
   'group_models': True,
 }
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 
 STATIC_URL = '/assets/static/'
