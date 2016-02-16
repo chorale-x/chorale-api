@@ -10,6 +10,7 @@ from rest_framework.response import Response
 
 from chorale_concerts.models import Concert, Musician, Soloist, Piece, Reservation
 from chorale_concerts.serializers import ConcertSerializer, ConcertPosterSerializer, PieceSerializer, SoloistSerializer, MusicianSerializer, ReservationSerializer
+from chorale_concerts.permissions import ReservationPermission
 
 
 class ConcertViewSet(viewsets.ModelViewSet):
@@ -65,6 +66,7 @@ class MusicianViewSet(viewsets.ModelViewSet):
 
 
 class ReservationViewSet(viewsets.ModelViewSet):
+    permission_classes = (ReservationPermission, )
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
     filter_fields = ('concert', 'checked', )
